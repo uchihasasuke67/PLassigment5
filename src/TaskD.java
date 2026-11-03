@@ -5,18 +5,18 @@ public class TaskD {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
         int count = 0;
 
-        int previous = sc.nextInt();
-
         for (int i = 1; i < n; i++) {
-            int current = sc.nextInt();
-
-            if (current > previous) {
+            if (a[i] > a[i - 1]) {
                 count++;
             }
-
-            previous = current;
         }
 
         System.out.println(count);

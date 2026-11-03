@@ -5,12 +5,15 @@ public class TaskB {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        int[] a = new int[n];
 
         for (int i = 0; i < n; i++) {
-            int x = sc.nextInt();
+            a[i] = sc.nextInt();
+        }
 
-            if (x % 2 == 0) {
-                System.out.print(x + " ");
+        for (int i = 0; i < n; i++) {
+            if (a[i] % 2 == 0) {
+                System.out.print(a[i] + " ");
             }
         }
     }

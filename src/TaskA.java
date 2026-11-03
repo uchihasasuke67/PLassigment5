@@ -5,13 +5,14 @@ public class TaskA {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        int[] a = new int[n];
 
         for (int i = 0; i < n; i++) {
-            int x = sc.nextInt();
+            a[i] = sc.nextInt();
+        }
 
-            if (i % 2 == 0) {
-                System.out.print(x + " ");
-            }
+        for (int i = 0; i < n; i += 2) {
+            System.out.print(a[i] + " ");
         }
     }
 }
