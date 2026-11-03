@@ -1,6 +1,18 @@
 import java.util.Scanner;
 
 public class TaskN {
+
+    public static void reverse(int[] a, int left, int right) {
+        while (left < right) {
+            int temp = a[left];
+            a[left] = a[right];
+            a[right] = temp;
+
+            left++;
+            right--;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -12,32 +24,16 @@ public class TaskN {
         }
 
         int k = sc.nextInt();
-        k = k % n;
+        k = ((k % n) + n) % n;
 
-        if (k > 0) {
-            for (int j = 0; j < k; j++) {
-                int temp = a[n - 1];
-
-                for (int i = n - 1; i > 0; i--) {
-                    a[i] = a[i - 1];
-                }
-
-                a[0] = temp;
-            }
-        } else {
-            for (int j = 0; j < -k; j++) {
-                int temp = a[0];
-
-                for (int i = 0; i < n - 1; i++) {
-                    a[i] = a[i + 1];
-                }
-
-                a[n - 1] = temp;
-            }
-        }
+        reverse(a, 0, n - 1);
+        reverse(a, 0, k - 1);
+        reverse(a, k, n - 1);
 
         for (int i = 0; i < n; i++) {
             System.out.print(a[i] + " ");
         }
+
+        sc.close();
     }
 }
