@@ -1,39 +1,58 @@
 import java.util.Scanner;
 
 public class TaskN {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    public static void reverse(int[] a, int left, int right) {
-        while (left < right) {
-            int temp = a[left];
-            a[left] = a[right];
-            a[right] = temp;
-
-            left++;
-            right--;
+        // Проверка наличия входных данных
+        if (!scanner.hasNextInt()) {
+            return;
         }
+
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        long k = scanner.nextLong();
+
+        if (n > 1) {
+            // Вычисляем эффективное количество сдвигов вправо
+            long steps = k % n;
+            if (steps < 0) {
+                steps += n;
+            }
+
+            int s = (int) steps;
+            if (s > 0) {
+                // Алгоритм тройного разворота (in-place сдвиг)
+                reverse(arr, 0, n - 1);     // 1. Разворачиваем весь массив
+                reverse(arr, 0, s - 1);     // 2. Разворачиваем первые s элементов
+                reverse(arr, s, n - 1);     // 3. Разворачиваем оставшиеся элементы
+            }
+        }
+
+        // Вывод результата через пробел
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(arr[i]);
+            if (i < n - 1) {
+                sb.append(" ");
+            }
+        }
+        System.out.println(sb.toString());
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        int[] a = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
+    // Вспомогательный метод для разворота участка массива на месте
+    private static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
         }
-
-        int k = sc.nextInt();
-        k = ((k % n) + n) % n;
-
-        reverse(a, 0, n - 1);
-        reverse(a, 0, k - 1);
-        reverse(a, k, n - 1);
-
-        for (int i = 0; i < n; i++) {
-            System.out.print(a[i] + " ");
-        }
-
-        sc.close();
     }
 }
